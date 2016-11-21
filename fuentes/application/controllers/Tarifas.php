@@ -17,8 +17,4 @@ class tarifas extends CI_Controller {
 	public function get_listado_tarifas(){
 		$this->load->view('paginas/reporte_tarifas');
 	}
-
-
 }
-
-?>

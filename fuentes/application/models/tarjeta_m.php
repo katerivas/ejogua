@@ -1,7 +1,5 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-Class tarjeta_m extends CI_Model
-{
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+Class tarjeta_m extends CI_Model{
 
 
 	public function registro_tarjeta($data){
@@ -9,4 +7,3 @@ Class tarjeta_m extends CI_Model
 		return $resultado;
 	}
 }
-?>

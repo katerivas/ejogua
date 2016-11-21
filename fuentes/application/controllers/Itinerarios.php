@@ -23,5 +23,3 @@ class Itinerarios extends CI_Controller {
 		$this->load->view('paginas/reporte_itinerarios');
 	}
 }
-
-?>

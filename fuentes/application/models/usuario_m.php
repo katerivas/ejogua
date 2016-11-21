@@ -1,6 +1,5 @@
-<?php
-Class Usuario_m extends CI_Model
-{
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+Class Usuario_m extends CI_Model{
 	function login($usuario, $password)
 	{
 		$this-> db -> select('id_usuario, usuario');
@@ -17,4 +16,3 @@ Class Usuario_m extends CI_Model
 		return $resultado;
 	}
 }
-?>

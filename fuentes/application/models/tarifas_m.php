@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class tarifas_m extends CI_Model {
 	/**
 	 * Modelo para manejo de consulta de saldo
