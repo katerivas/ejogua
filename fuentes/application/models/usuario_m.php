@@ -15,4 +15,14 @@ Class Usuario_m extends CI_Model{
 		$resultado = $this->db->insert('usuarios', $data);
 		return $resultado;
 	}
+
+//we will use the select function
+	public function obtener_datos_usuario()
+	{
+		$this->db->select('*');
+		$this->db->where('usuario', $usuario_sesion);
+		//data is retrive from this query
+		$query = $this->db->get('usuarios');
+		return $query->result();
+	}
 }

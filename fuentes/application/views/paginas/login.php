@@ -1,7 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<title>Ejogua</title>
+<!-- Cabecera -->
+<?php $this->load->view('comunes/cabecera')?>
 </head>
 <body>
 <h1>Login</h1>
@@ -12,7 +13,11 @@ if(!empty($mensaje)){
 }
 ?>
 </p>
-  <form action="usuario/login" method="post">
+ <?php echo form_error('usuario'); ?>
+<div class="content well">
+<h2>Login</h2>
+<div class="form-group">
+   <form action="usuario/login" method="post">
      <label for="usuario">Usuario:</label>
      <input type="text" size="20" id="usuario" name="usuario"/>
      <br/>
@@ -22,5 +27,7 @@ if(!empty($mensaje)){
      <a href="usuario/vista_usuario">Registrarse</a><br>
      <input type="submit" value="Login"/>
    </form>
+   </form>
+  </div>
  </body>
 </html>

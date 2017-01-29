@@ -34,19 +34,29 @@
 <html>
 <body>
 <?php $this->load->view('comunes/menu')?>
-<div class="content">
+<div class="content well">
 <form method="post" action="reclamo/obtener_datos_reclamos">
 	<h2>Complete el siguiente formulario</h2>
 	<p>Tipo de reclamo que desea enviar</p>
-	<input type="checkbox" id=tipo_reclamo name="tipo_reclamo" value="queja">Queja<br>
-  	<input type="checkbox" id="tipo_reclamo" name="tipo_reclamo" value="reclamo">Reclamo<br>
-  	<input type="checkbox" id="tipo_reclamo" name="tipo_reclamo" value="sugerencia">Sugerencia<br>
-	<input type="checkbox" id="tipo_reclamo" name="tipo_reclamo" value="felicitacion">Felicitaci&oacuten<br>
-	<br>Escriba sus comentarios en no m&aacutes de 200 caracteres: <br>
-	<textarea rows="4" cols="50" id="detalle_reclamo" name="detalle_reclamo">
- 	Escriba su comentario aqui.
-	</textarea>
-  	<input type="button" href="javascript:;" onclick="enviar_reclamo($('#tipo_reclamo').val(), $('#detalle_reclamo').val());return false;" value="Enviar reclamo"/>
+	<div class="checkbox">
+		<input type="checkbox" id=tipo_reclamo name="tipo_reclamo" value="queja">Queja<br>
+	</div>
+	<div class="checkbox">
+  		<input type="checkbox" id="tipo_reclamo" name="tipo_reclamo" value="reclamo">Reclamo<br>
+  	</div>
+  	<div class="checkbox">
+  		<input type="checkbox" id="tipo_reclamo" name="tipo_reclamo" value="sugerencia">Sugerencia<br>
+	</div>
+	<div class="checkbox">
+		<input type="checkbox" id="tipo_reclamo" name="tipo_reclamo" value="felicitacion">Felicitaci&oacuten<br>
+	</div>
+	<div class="form-group">
+		<br>Escriba sus comentarios en no m&aacutes de 200 caracteres: <br>
+		<textarea rows="4" cols="50" id="detalle_reclamo" name="detalle_reclamo">
+ 		Escriba su comentario aqui.
+		</textarea>
+	</div>
+  	<input type="button" class="btn btn-primary" href="javascript:;" onclick="enviar_reclamo($('#tipo_reclamo').val(), $('#detalle_reclamo').val());return false;" value="Enviar reclamo"/>
   	<div id="resultado"></div>
 </form>
 </div>

@@ -16,14 +16,14 @@ class billetera_m extends CI_Model {
     }
 
 	public function cargar_saldo($data) {
-      	$numero_tarjeta = $data['id_tarjeta'];
+      	$numero_tarjeta = $data['numero_tarjeta'];
       	$saldo_obtenido = $this->obtener_saldo($numero_tarjeta);
       	if ($saldo_obtenido	-> num_rows() > 0){
       		$resultado = $saldo_obtenido->row();
       		$saldo = $resultado -> saldo;
       		$data['saldo'] = $data['saldo'] + $saldo;
-     		$this->db->where('id_tarjeta', $data['id_tarjeta']);
-      		$this->db->update('billetera', $data);
+     		$this->db->where('numero_tarjeta', $data['id_tarjeta']);
+      		$this->db->update('tarjeta', $data);
       		//echo $this->db->last_query();
       		//die();
       		return true;
@@ -32,8 +32,21 @@ class billetera_m extends CI_Model {
 
     public function obtener_saldo($numero_tarjeta){
       	$this->db->select('saldo');
-      	$this->db->where('id_tarjeta', $numero_tarjeta);
-      	$resultado = $this->db->get('billetera');
+      	$this->db->where('numero_tarjeta', $numero_tarjeta);
+      	$resultado = $this->db->get('tarjeta');
       	return $resultado;
       }
+
+function existe($numero_tarjeta)
+      {
+      	$this->db->where('numero_tarjeta', $numero_tarjeta);
+      	$query = $this->db->get('tarjeta');
+      	if ($query->num_rows() > 0){
+      		return true;
+      	}
+      	else{
+      		return false;
+      	}
+      }
+
 }

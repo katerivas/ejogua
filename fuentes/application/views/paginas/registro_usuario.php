@@ -1,6 +1,7 @@
-<!DOCTYPE unspecified PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <head>
 <?php $this->load->view('comunes/cabecera')?></head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Registrar Usuario</title>
 	<script>
 		function registrar_usuario(usuario, password, nombre, apellido, genero, nro_ci, direccion, email, telefono){
@@ -25,37 +26,64 @@
 	                /* $("#resultado").html("Procesando, espere por favor..."); */
 	            },
 	            success: function (resultado) {
-	            	/* var v_saldo = jQuery.parseJSON(resultado);
-	                $("#resultado").html("Saldo: " + v_saldo[0].saldo); */
-	            	if(resultado){
+	            	 var respuesta = JSON.parse(resultado);
+	                if(respuesta.success){
 			            $("#resultado").html("Usuario Registrado"); 				
 			        }else{
-			            $("#resultado").html("Usuario no Registrado");
-				    }
+			            $("#resultado").html(respuesta.error);
 	            }
+}
 	        });
 		}
 	</script>
 <html>
 <body>
 <?php $this->load->view('comunes/menu')?>
-<div class="content">
+<div><?php echo validation_errors(); ?></div>
 <form method="post" action="billetera/agregar_usuario">
+<div class="well">
 	<h2>Registro de Usuario</h2>
-	Nombre de usuario: <input type="text" name="usuario" id="usuario"><br>
-	Contrase&ntildea: <input type="password" name="password" id="password"><br>
+	<div class="form-group">
+		<label>Nombre de usuario:</label>
+		<input type="text" class="form-control" name="usuario" id="usuario">
+	</div>
+	<div class="form-group"> 
+		<label>Contrase&ntildea:</label>
+		<input type="password" class="form-control name="password" id="password">
+	</div>
 	<h3>Datos Personales</h3>
-	Nombre: <input type="text" name="nombre" id="nombre" ><br>
-	Apellido: <input type="text" name="apellido" id="apellido"><br>
-	Genero: <input type="checkbox" name="genero" value="M" id="M"> Masculino<br>
- 	<input type="checkbox" name="genero" value="F" checked="checked" id="F"> Femenino<br>
-  	Numero de Documento: <input type="text" name="nro_ci" id="nro_ci"><br>
-  	Direccion: <input type="text" name="direccion" id="direccion"><br>
-  	Email: <input type="text" name="email" id="email"><br>
-  	Telefono: <input type="text" name="telefono" id="telefonos"><br>
-  	<input type="button" href="javascript:;" onclick="registrar_usuario($('#usuario').val(), $('#password').val(), $('#nombre').val(), $('#apellido').val(), $('#genero').val(), $('#nro_ci').val(), $('#direccion').val(), $('#email').val(), $('#telefono').val());return false;" value="Registrar"/>
-	<div id="resultado"></div>
+	<div class="form-group">
+		<label>Nombre:</label> 
+		<input type="text" class="form-control" name="nombre" id="nombre" >
+	</div>
+	<div class="form-group">
+		<label>Apellido:</label> 
+		<input type="text" class="form-control" name="apellido" id="apellido">
+	</div>
+
+	<label>Genero: </label>
+	<input type="checkbox" name="genero" value="M" id="M"> Masculino
+ 	<input type="checkbox" name="genero" value="F" checked="checked" id="F"> Femenino
+ 	<div class="form-group">
+  		<label>Numero de Documento:</label>
+  		<input type="text" class="form-control" name="nro_ci" id="nro_ci">
+  	</div>
+  	<div class="form-group">
+  		<label>Direccion: </label>
+  		<input type="text" class="form-control" name="direccion" id="direccion">
+  	</div>
+  	<div class="form-group">
+  		<label>Email: </label>
+  		<input type="text" class="form-control" name="email" id="email">
+  	</div>
+  	<div class="form-group">
+  		<label>Telefono:</label>
+  		<input type="text"class="form-control name="telefono" id="telefonos">
+  		
+	</div>
+	<input type="button" class="btn btn-primary" href="javascript:;" onclick="registrar_usuario($('#usuario').val(), $('#password').val(), $('#nombre').val(), $('#apellido').val(), $('#genero').val(), $('#nro_ci').val(), $('#direccion').val(), $('#email').val(), $('#telefono').val());return false;" value="Registrar"/>
 </form>
+</div>	
 </div>
 </body>
 </html>
