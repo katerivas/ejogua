@@ -13,17 +13,14 @@
 	            data: parametros,
 	            url:   '/billetera/consultar_saldo',
 	            type:  'post',
-	            
 	            success: function (resultado) {
 	                var respuesta = JSON.parse(resultado);
+	                console.log("resultado: ",respuesta );
 	                if(respuesta.success){
-		                // Crear tabla html para listar todos los saldos.
-		                
-	                	$("#resultado").html("Saldo: " + respuesta.saldos[0].saldo);				
+	                	$("#resultado").html("Saldo: " + respuesta.datos[0].saldo);				
 		            }else{
-		            	 $("#resultado").html(respuesta.error);
-			        } 
-	                $("#resultado").html("Procesando, espere por favor...");
+		            	 $("#resultado").html('Saldo vacío.');
+			        }
 	            }
 	        });
 		}
@@ -31,9 +28,8 @@
 </head>
 <body>
 	<?php $this->load->view('comunes/menu')?>
-	<div class="content">
-	<form action="billetera/consultar_saldo">
-    <div class="well">
+    <div class="content well">
+    <form action="billetera/consultar_saldo">
 	<div class="form-group">
     	<h2>Consulta de Saldo</h2>
 		Numero de Tarjeta: <br>

@@ -37,7 +37,6 @@ class tarjeta extends CI_Controller {
 	public function registro_tarjeta(){
 		
 		$id_usuario = $this->session->userdata('id_usuario');
-
 		$data = array(
 		'id_usuario' => $id_usuario,
 		'numero_tarjeta' =>$this->input->post('numero_tarjeta', true),

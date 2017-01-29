@@ -1,15 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class usuario extends CI_Controller {
-
-	function __construct()
-	{
+	function __construct(){
 		parent::__construct();
 		$this->load->model('usuario_m', 'usuario');
 	}
 
-	public function index()
-	{
+	public function index(){
 		//$this->load->helper(array('form'));
 		$this->load->view('paginas/login');
 	}
@@ -31,9 +28,9 @@ class usuario extends CI_Controller {
 
 			$this->load->view('inicio/inicio');
 		}else{
-			//redirect("/usuario","refresh");
-			$data['mensaje']='Usuario o password incorrecto';
-			$this->load->view('paginas/login',$data);
+			 //redirect("/usuario","refresh");
+			 $data['mensaje'] = 'Usuario o password incorrecto';
+			 $this->load->view('paginas/login', $data);
 		}
 
 	}

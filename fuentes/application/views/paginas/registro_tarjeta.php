@@ -33,7 +33,7 @@
 <html>
 <body>
 <?php $this->load->view('comunes/menu')?>
-<div class="well">
+<div class="content well">
 		<h2>Registro de Tarjeta</h2>
 		
 		<div id="resultado"></div>

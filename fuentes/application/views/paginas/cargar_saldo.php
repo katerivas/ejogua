@@ -34,21 +34,22 @@
 </head>
 <body>
 <?php $this->load->view('comunes/menu')?>
-<div class="content well"" >
-<form method="post" action="billetera/cargar_saldo">
-<div class="form-group">
-    <h2>Carga de Saldo</h2><br>
-		Numero de Tarjeta: <br>
-	    <input type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta"/><br>
-</div>
-<div class="form-group">
-	    Monto: <br>
-	    <input type="text"class="form-control" name="monto" id="monto"/><br>
-	    <input type="button" class="btn btn-primary" href="javascript:;" onclick="acreditarSaldo($('#numero_tarjeta').val(),$('#monto').val());return false;" value="Cargar Saldo"/>
- 		<br>
-
- 	<div id="resultado"></div>
-</div>
+<div class="content well">
+	<form method="post" action="billetera/cargar_saldo">
+	<div class="form-group">
+	    <h2>Carga de Saldo</h2><br>
+			Numero de Tarjeta: <br>
+		    <input type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta"/><br>
+	</div>
+	<div class="form-group">
+		    Monto: <br>
+		    <input type="text"class="form-control" name="monto" id="monto"/><br>
+		    <input type="button" class="btn btn-primary" href="javascript:;" onclick="acreditarSaldo($('#numero_tarjeta').val(),$('#monto').val());return false;" value="Cargar Saldo"/>
+	 		<br>
+	
+	 	<div id="resultado"></div>
+	</div>
+	</form>
+	</div>
 </body>
-</div>
 </html>
