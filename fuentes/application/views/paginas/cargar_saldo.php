@@ -16,24 +16,21 @@
 	            data: parametros,
 	            url:   '/billetera/cargar_saldo',
 	            type:  'post',
-	            beforeSend: function () {
-	                //$("#resultado").html("Procesando, espere por favor...");
-	            },
-	             success: function (resultado) {
-	            	var respuesta = JSON.parse(resultado);
-	            	if(respuesta.success){
-			            $("#resultado").html("Saldo Cargado"); 				
-			        }else{
-			            $("#resultado").html(respuesta.error);
-	                $("#resultado").html("Procesando, espere por favor...");
-}
-}
+	            success: function (resultado) {
+	                var respuesta = JSON.parse(resultado);
+	                if(respuesta.success){
+	                	$("#resultado").html("Saldo Cargado");				
+		            }else{
+		            	 $("#resultado").html(respuesta.error);
+			        }
+	            }
 	        });
-		} 
+		}
 	</script>
 </head>
 <body>
 <?php $this->load->view('comunes/menu')?>
+ <?php echo form_open('form_validation/check_validation');?>
 <div class="content well">
 	<form method="post" action="billetera/cargar_saldo">
 	<div class="form-group">
@@ -41,11 +38,13 @@
 			Numero de Tarjeta: <br>
 		    <input type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta"/><br>
 	</div>
-	<div class="form-group">
+			<?php echo form_error('numero_tarjeta');?>
+			<div class="form-group">
 		    Monto: <br>
 		    <input type="text"class="form-control" name="monto" id="monto"/><br>
 		    <input type="button" class="btn btn-primary" href="javascript:;" onclick="acreditarSaldo($('#numero_tarjeta').val(),$('#monto').val());return false;" value="Cargar Saldo"/>
 	 		<br>
+	 		<?php echo form_error('monto');?>
 	
 	 	<div id="resultado"></div>
 	</div>

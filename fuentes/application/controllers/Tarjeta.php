@@ -6,6 +6,8 @@ class tarjeta extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('tarjeta_m', 'tarjeta');
+		$this->load->library('form_validation');
+		$this->load->helper('form');
 	}
 
 	public function index()
@@ -35,25 +37,32 @@ class tarjeta extends CI_Controller {
 	}
 	
 	public function registro_tarjeta(){
+		$this->form_validation->set_rules('numero_tarjeta','numero_tarjeta', 'required|numeric');
+		$this->form_validation->set_rules('codigo_seguridad','codigo_seguridad', 'required|numeric');
+		if($this->form_validation->run()==true){
+			$id_usuario = $this->session->userdata('id_usuario');
+			$data = array(
+			'id_usuario' => $id_usuario,
+			'numero_tarjeta' =>$this->input->post('numero_tarjeta', true),
+			'codigo_seguridad' => $this->input->post('codigo_seguridad', true),
+			'tipo_tarjeta' =>$this->input->post('tipo_tarjeta',true)
+			 );
+			 
+			/*  var_dump($data);
+			 die(); */
 		
-		$id_usuario = $this->session->userdata('id_usuario');
-		$data = array(
-		'id_usuario' => $id_usuario,
-		'numero_tarjeta' =>$this->input->post('numero_tarjeta', true),
-		'codigo_seguridad' => $this->input->post('codigo_seguridad', true),
-		'tipo_tarjeta' =>$this->input->post('tipo_tarjeta',true)
-		 );
-		 
-		/*  var_dump($data);
-		 die(); */
-	
-		$this->load->model('tarjeta_m', 'tarjeta');
-		$resultado = $this->tarjeta->registro_tarjeta($data);
-		// Vista tarjeta.
-		echo json_encode($resultado);
-
-	
+			$this->load->model('tarjeta_m', 'tarjeta');
+			$resultado = $this->tarjeta->registro_tarjeta($data);
+			// Vista tarjeta.
+			echo json_encode($resultado);
+		}else{
+				$data['error'] = validation_errors();
+				$data['success'] = false;
+				echo json_encode($data);
+				// update not successful
 	}
-}
+	}
+	}
+
 
 ?>

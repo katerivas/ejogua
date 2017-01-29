@@ -5,7 +5,6 @@
 <title></title>
 	<script>
 		function consultarSaldo(numero_tarjeta){
-			
 			var parametros = {
 	             "numero_tarjeta" : numero_tarjeta
 	        };
@@ -15,11 +14,10 @@
 	            type:  'post',
 	            success: function (resultado) {
 	                var respuesta = JSON.parse(resultado);
-	                console.log("resultado: ",respuesta );
 	                if(respuesta.success){
 	                	$("#resultado").html("Saldo: " + respuesta.datos[0].saldo);				
 		            }else{
-		            	 $("#resultado").html('Saldo vacío.');
+		            	 $("#resultado").html(respuesta.error);
 			        }
 	            }
 	        });
@@ -28,17 +26,20 @@
 </head>
 <body>
 	<?php $this->load->view('comunes/menu')?>
+	<?php echo form_open('form_validation/check_validation');?>
     <div class="content well">
     <form action="billetera/consultar_saldo">
 	<div class="form-group">
     	<h2>Consulta de Saldo</h2>
 		Numero de Tarjeta: <br>
    		<input type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta"/>
+ 		 <?php echo form_error('numero_tarjeta');  ?> 
     </div>
     <input type="button" class="btn btn-primary" href="javascript:;" onclick="consultarSaldo($('#numero_tarjeta').val());return false;" value="Consultar"/>
  	<br>
     <span id="resultado"></span></form>
     <?php echo  form_close();?>
     </div>
+
 </body>
 </html>

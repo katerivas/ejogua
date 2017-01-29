@@ -45,16 +45,7 @@
 foreach ($resultado as $r){?>
  	<label>Nombre</label>
     <input type="text" class="form-control" id="nombre"value="<?php echo $r->nombre;?>" />
-    <label>Apellido</label>
-    <input type="text" class="form-control" id="apellido"value="<?php echo $r->apellido;?>" />
-    <label>Numero de Cedula de Identidad</label>
-    <input type="text" class="form-control" id="nro_ci"value="<?php echo $r->nro_ci;?>" />
-    <label>Direccion</label>
-    <input type="text" class="form-control" id="direccion"value="<?php echo $r->direccion;?>" />
-    <label>Email</label>
-    <input type="text"  class="form-control" id="email"value="<?php echo $r->email;?>" />
-    <label>Telefono</label>
-    <input type="text"class="form-control" id="telefono"value="<?php echo $r->telefono;?>" />
+
 
 <?php } ?> 
 <br>
