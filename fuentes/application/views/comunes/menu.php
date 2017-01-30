@@ -33,6 +33,18 @@
 	</ul>
 	
 	
+	<ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuraci&oacuten <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/usuario/ver_datos_usuario">Modificar mi usuario</a></li>
+            <li><a href="#">Cerrar Sesion</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+	</li>
+	</ul>
     </div>     
    </div>
 </nav>

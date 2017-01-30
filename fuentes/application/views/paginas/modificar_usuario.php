@@ -19,7 +19,7 @@
    
     $.ajax({
         data: parametros,
-        url:   '/usuario/ver_datos_usuario',
+        url:   '/usuario/modificar_usuario',
         type:  'post',
         beforeSend: function () {
             //$("#resultado").html("Procesando, espere por favor...");
@@ -39,13 +39,22 @@
 <?php $this->load->view('comunes/menu')?>
 <div class="content">
 <div><?php echo validation_errors(); ?></div>
-<form method="post" action="usuario/ver_datos_usuario">
+<form method="post" action="usuario/modificar_usuario">
 <div class="form-group">
 <?php 
 foreach ($resultado as $r){?>
  	<label>Nombre</label>
     <input type="text" class="form-control" id="nombre"value="<?php echo $r->nombre;?>" />
-
+    <label>Apellido</label>
+    <input type="text" class="form-control" id="apellido"value="<?php echo $r->apellido;?>" />
+    <label>Cedula de Identidad</label>
+    <input type="text" class="form-control" id="nro_ci"value="<?php echo $r->nro_ci;?>" />
+    <label>Direcci&oacuten</label>
+    <input type="text" class="form-control" id="direccion"value="<?php echo $r->direccion;?>" />
+    <label>Email</label>
+    <input type="text" class="form-control" id="email"value="<?php echo $r->email;?>" />
+    <label>Tel&eacutefono</label>
+    <input type="text" class="form-control" id="telefono"value="<?php echo $r->telefono;?>" />
 
 <?php } ?> 
 <br>
