@@ -29,17 +29,11 @@ Class Usuario_m extends CI_Model{
 	public function ver_datos_usuario($id_usuario)
 	{
 	
-		$this->db->select('nombre, apellido, nro_ci, direccion, email, telefono');
+		$this->db->select('nombre','apellido','nro_ci', 'direccion','email','telefono','password');
 		$this->db->where('id_usuario', $id_usuario);
 		$this->db->from('usuarios');
 		$query = $this->db->get();
-		return $query->result();
+		return $resultado = $query->result();
 	
-	}
-	
-	public function actualizar($id_usuario,$data){
-		$this->db->where('id_usuario', $id_usuario);
-		$this->db->update('usuarios', $data);
-		return true;
 	}
 }

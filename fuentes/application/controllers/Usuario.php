@@ -34,29 +34,14 @@ class usuario extends CI_Controller {
 		}
 
 	}
-	public function ver_datos_usuario(){
-		$id_usuario = 53;
+	public function modificar_usuario(){
+		$id_usuario = 1;
 		$this->load->model('usuario_m');
 		$data['resultado'] = $this->usuario_m->ver_datos_usuario($id_usuario);
 		$this->load->view('paginas/modificar_usuario',$data);
 	
 	}
 
-	public function modificar_usuario(){
-		$this->ver_datos_usuario();
-		$id_usuario = 53;
-		$data = array(
-				'nombre' => $this->input->post('nombre'),
-				'apellido' => $this->input->post('apellido'),
-				'nro_ci' => $this->input->post('nro_ci'),
-				'direccion' => $this->input->post('direccion'),
-				'direccion' => $this->input->post('email'),
-				'telefono' => $this->input->post('telefono'),
-		);
-		$this->load->model('usuario_m');
-		$this->usuario_m->actualizar($id_usuario,$data);
-		
-	}
 	public function vista_usuario(){
 		$this->load->view('paginas/registro_usuario');
 	}
