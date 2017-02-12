@@ -5,12 +5,31 @@ class Itinerarios extends CI_Controller {
 		parent::__construct();
 		$this->load->library('Mpdf/mpdf');
 		$this->load->model('itinerarios_m', 'itinerarios');
-	}
+		if ( $this->session->userdata('logged_in'))
+		{
+				// Allow some methods?
+				$allowed = array(
+						'index'
+				);
+				if ( in_array($this->router->fetch_method(), $allowed))
+				{
+						// $this->load->helper('url');
+						// redirect('/paginas/error');
+						// $this->load->view('/paginas/error');
+						// $this->load->view('/paginas/error');
+						$this->load->helper('url');
+						redirect('/itinerarios/error', 'location');
 
-	public function v_itinerarios()
-	{
-		$this->load->view('paginas/reporte_itinerarios');
-	}
+
+				}
+		}
+
+}
+
+public function error(){
+	$this->load->view('/paginas/error');
+}
+	
 
 	public function index()
 	{
@@ -19,7 +38,4 @@ class Itinerarios extends CI_Controller {
 		$this->load->view('paginas/reporte_itinerarios', $data);
 	}
 
-	public function generar_reporte(){
-		$this->load->view('paginas/reporte_itinerarios');
-	}
 }

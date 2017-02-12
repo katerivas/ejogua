@@ -2,6 +2,7 @@
 <html>
 <head>
 <?php $this->load->view('comunes/cabecera')?>
+	<?php $this->load->view('comunes/menu')?>
 <title></title>
 	<script>
 		function consultarSaldo(numero_tarjeta){
@@ -13,9 +14,11 @@
 	            url:   '/billetera/consultar_saldo',
 	            type:  'post',
 	            success: function (resultado) {
-	                var respuesta = JSON.parse(resultado);
-	                if(respuesta.success){
-	                	$("#resultado").html("Saldo: " + respuesta.datos[0].saldo);				
+	                // var respuesta = JSON.parse(resultado);
+									// console.log(respuesta);
+	                if(resultado){
+	                	$("#resultado").html("Saldo: " + resultado);
+										$("#resultado").show();
 		            }else{
 		            	 $("#resultado").html(respuesta.error);
 			        }
@@ -25,19 +28,24 @@
 	</script>
 </head>
 <body>
-	<?php $this->load->view('comunes/menu')?>
-	<?php echo form_open('form_validation/check_validation');?>
+
     <div class="content well">
-    <form action="billetera/consultar_saldo">
-	<div class="form-group">
-    	<h2>Consulta de Saldo</h2>
-		Numero de Tarjeta: <br>
-   		<input type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta"/>
- 		 <?php echo form_error('numero_tarjeta');  ?> 
+    <form method="post" action="billetera/obtener_datos">
+			<div class="form-group">
+    		<h2>Consulta de Saldo</h2>
+					Numero de Tarjeta: <br>
+					<select class="form-control" name="numero_tarjeta"  id="numero_tarjeta">
+					<?php
+						foreach ($tarjetas as $t) {
+							echo "<option value='". $t['numero_tarjeta'] . "'>" . $t['numero_tarjeta'] . "</option>";
+						}
+						?>
+					</select>
     </div>
     <input type="button" class="btn btn-primary" href="javascript:;" onclick="consultarSaldo($('#numero_tarjeta').val());return false;" value="Consultar"/>
  	<br>
-    <span id="resultado"></span></form>
+	<br>
+    <div class="alert alert-success" id="resultado" hidden="true"></div></form>
     <?php echo  form_close();?>
     </div>
 

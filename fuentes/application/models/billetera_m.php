@@ -8,9 +8,9 @@ class billetera_m extends CI_Model {
 		parent::__construct();
 	}
 
-	public function listarSaldo($nro_tarjeta){
-	  	$this->db->select("saldo");
-	  	$this->db->where("numero_tarjeta", $nro_tarjeta);
+	public function listarSaldo($numero_tarjeta){
+	  	$this->db->select('saldo');
+	  	$this->db->where('numero_tarjeta', $numero_tarjeta);
 	  	$v_consulta = $this->db->get('tarjeta');
 	  	return $v_consulta;
     }
@@ -22,13 +22,27 @@ class billetera_m extends CI_Model {
       		$resultado = $saldo_obtenido->row();
       		$saldo = $resultado -> saldo;
       		$data['saldo'] = $data['saldo'] + $saldo;
-     		$this->db->where('numero_tarjeta', $data['numero_tarjeta']);
+     			$this->db->where('numero_tarjeta', $data['numero_tarjeta']);
       		$this->db->update('tarjeta', $data);
-      		//echo $this->db->last_query();
-      		//die();
+      		echo $this->db->last_query();
+      		die();
       		return true;
       	}
 	}
+	function get_tarjetas($id_usuario) {
+	        $data = array();
+	        $this->db->select('*');
+					$this->db->where('id_usuario',$id_usuario);
+	        $query = $this->db->get('tarjeta');
+	        if ($query->num_rows() > 0) {
+	            foreach ($query->result_array() as $row){
+	                    $data[] = $row;
+	                }
+	        }
+	        $query->free_result();
+	        return $data;
+
+	  }
 
     public function obtener_saldo($numero_tarjeta){
       	$this->db->select('saldo');

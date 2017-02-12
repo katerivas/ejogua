@@ -14,10 +14,12 @@
 	     <input type="text" class="form-control" size="20" id="usuario" name="usuario"/>
 	     <br/>
 	     <label for="password">Password:</label>
-	     <input type="password" class="form-control"size="20" id="passowrd" name="password"/>
+	     <input type="password" class="form-control"size="20" id="password" name="password"/>
 	     <br/>
 	      <p style="color:red">
-		  <?php 
+
+					<?php echo validation_errors(); ?>
+		  <?php
 	          if(!empty($mensaje)){
 			      echo  $mensaje;
 			  }

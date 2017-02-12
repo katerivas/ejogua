@@ -6,9 +6,34 @@ class reclamos extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('reclamos_m', 'reclamos');
+
+		if ( $this->session->userdata('logged_in'))
+		{
+				// Allow some methods?
+				$allowed = array(
+						'index'
+				);
+				if ( in_array($this->router->fetch_method(), $allowed))
+				{
+						// $this->load->helper('url');
+						// redirect('/paginas/error');
+						// $this->load->view('/paginas/error');
+						// $this->load->view('/paginas/error');
+						$this->load->helper('url');
+						redirect('/reclamos/error', 'location');
+
+
+				}
+		}
+
+}
+
+
+
+	public function error(){
+		$this->load->view('/paginas/error');
 	}
 
-	
 	public function index()
 	{
 		//$this->load->helper(array('form'));
@@ -30,9 +55,9 @@ class reclamos extends CI_Controller {
 				/* 'usuario' => $this->input->post('usuario',true), */
 				'tipo_reclamo' =>$this->input->post('tipo_reclamo', true),
 				'detalle_reclamo' => $this->input->post('detalle_reclamo', true),
-				
+
 		);
-			
+
 		/*  var_dump($data);
 		 die(); */
 
