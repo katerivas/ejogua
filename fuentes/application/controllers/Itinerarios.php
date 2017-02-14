@@ -9,7 +9,7 @@ class Itinerarios extends CI_Controller {
 		{
 				// Allow some methods?
 				$allowed = array(
-						'index'
+
 				);
 				if ( in_array($this->router->fetch_method(), $allowed))
 				{
@@ -29,7 +29,7 @@ class Itinerarios extends CI_Controller {
 public function error(){
 	$this->load->view('/paginas/error');
 }
-	
+
 
 	public function index()
 	{

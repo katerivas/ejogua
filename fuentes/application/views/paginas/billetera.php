@@ -13,14 +13,15 @@
 	            data: parametros,
 	            url:   '/billetera/consultar_saldo',
 	            type:  'post',
+							dataType: 'json',
 	            success: function (resultado) {
-	                // var respuesta = JSON.parse(resultado);
-									// console.log(respuesta);
+	              //  var resultado = JSON.parse(resultado);
+									//  console.log(resultado);
 	                if(resultado){
-	                	$("#resultado").html("Saldo: " + resultado);
+	                	$("#resultado").html("Saldo: " + resultado.datos.saldo);
 										$("#resultado").show();
 		            }else{
-		            	 $("#resultado").html(respuesta.error);
+		            	 $("#resultado").html("Error");
 			        }
 	            }
 	        });

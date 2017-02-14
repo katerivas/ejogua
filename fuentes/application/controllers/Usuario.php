@@ -8,7 +8,6 @@ class Usuario extends CI_Controller {
 	}
 
 	public function index(){
-
 		$this->load->view('paginas/login');
 	}
 
@@ -69,11 +68,12 @@ class Usuario extends CI_Controller {
 				);
 				$this->load->model('usuario_m');
 				$this->usuario_m->actualizar($id_usuario,$data);
+				$data['success'] = true;
+				echo json_encode($data);
 			} else {
 			header("location: login");
 			}
 		}else{
-			 // Vista billetera.
 			 $data['error'] = validation_errors();
 			 $data['success'] = false;
 			 echo json_encode($data);
@@ -91,7 +91,7 @@ class Usuario extends CI_Controller {
 	public function agregar_usuario(){
 		 $data = array(
 			 'usuario' => $this->input->post('usuario',true),
-			 'password' => $this->input->post('password',true),
+			 'password' => md5($this->input->post('password',true)),
 			 'nombre' => $this->input->post('nombre',true),
 			 'apellido' => $this->input->post('apellido',true),
 			 'genero' => $this->input->post('genero',true),
@@ -111,11 +111,11 @@ class Usuario extends CI_Controller {
 	}
 
 
-	public function select_roles(){
-		$this->load->model('usuario_m');
-		$data['roles'] = $this->usuario_m->select_roles()->result();
-		$this->load->view('paginas/administrar_usuarios',$data);
-	}
+	// public function select_roles(){
+	// 	$this->load->model('usuario_m');
+	// 	$data['roles'] = $this->usuario_m->select_roles()->result();
+	// 	$this->load->view('paginas/administrar_usuarios',$data);
+	// }
 
 
 	public function mostrar_id_usuario(){

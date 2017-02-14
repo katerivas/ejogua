@@ -1,10 +1,6 @@
 <!DOCTYPE unspecified PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
-
-
-
 <?php $this->load->view('comunes/cabecera')?>
 <title>Registrar Tarjeta</title>
 	<script>
@@ -22,11 +18,13 @@
 	            data: parametros,
 	            url:   '/tarjeta/registro_tarjeta',
 	            type:  'post',
+
 	             beforeSend: function () {
 	                 //$("#resultado").html("Procesando, espere por favor...");
 	            },
 	            success: function (resultado) {
 	            	var respuesta = JSON.parse(resultado);
+								console.log(respuesta);
 		            if(respuesta.success){
 		            	$("#resultado_success").html("Tarjeta Ingresada");
 									$("#numero_tarjeta").val('');

@@ -1,8 +1,9 @@
 @CHARSET "ISO-8859-1";
+
 .content{
 	margin:0 auto 0 auto;
-	width:600px;
-		
+	width:800px;
+
 }
 .dropbtn {
     background-color: #4CAF50;
@@ -42,4 +43,3 @@
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
 }
-

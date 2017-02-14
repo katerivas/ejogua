@@ -33,7 +33,7 @@
 <body>
 
 <?php $this->load->view('comunes/menu')?>
-<div class="container well">
+<div class="content well">
 	<form method="post" action="billetera/obtener_datos2">
 		<?php echo form_open('form_validation/check_validation');?>
 		<div><?php echo validation_errors(); ?></div>

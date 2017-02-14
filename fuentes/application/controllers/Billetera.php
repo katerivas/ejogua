@@ -93,8 +93,10 @@ public function obtener_datos(){
 	{
 					$numero_tarjeta = $this->input->post('numero_tarjeta',true);
 					$this->load->model('billetera_m');
-					$resultado = $this->billetera_m->listarSaldo($numero_tarjeta)->result();
-					$data['datos'] = $resultado;
+					$resultado = $this->billetera_m->listarSaldo($numero_tarjeta);
+					$data['datos'] = $resultado->result();
+					// var_dump($data);
+					// die();
 					$data['success'] = true;
 					echo json_encode($data);
 	}

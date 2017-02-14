@@ -11,6 +11,7 @@ class billetera_m extends CI_Model {
 	public function listarSaldo($numero_tarjeta){
 	  	$this->db->select('saldo');
 	  	$this->db->where('numero_tarjeta', $numero_tarjeta);
+
 	  	$v_consulta = $this->db->get('tarjeta');
 	  	return $v_consulta;
     }
@@ -33,6 +34,7 @@ class billetera_m extends CI_Model {
 	        $data = array();
 	        $this->db->select('*');
 					$this->db->where('id_usuario',$id_usuario);
+					$this->db->where('id_estado', 1);
 	        $query = $this->db->get('tarjeta');
 	        if ($query->num_rows() > 0) {
 	            foreach ($query->result_array() as $row){

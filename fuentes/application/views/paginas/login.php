@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <!-- Cabecera -->
 <?php $this->load->view('comunes/cabecera')?>

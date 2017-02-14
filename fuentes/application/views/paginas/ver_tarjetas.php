@@ -4,11 +4,44 @@
 <head>
 <?php $this->load->view('comunes/cabecera')?>
 <?php $this->load->view('comunes/menu')?>
+
+<script>
+	function modificar_tarjeta(id_tarjeta,numero_tarjeta,codigo_seguridad,tipo_tarjeta,id_estado){
+
+		var parametros = {
+						"id_tarjeta" : id_tarjeta,
+						"numero_tarjeta" : numero_tarjeta,
+						"codigo_seguridad" : codigo_seguridad,
+						"tipo_tarjeta" : tipo_tarjeta,
+						"id_estado" : id_estado
+
+				};
+				console.log(parametros);
+				$.ajax({
+						data: parametros,
+						url:   '/tarjeta/actualizar_tarjeta',
+						type:  'post',
+						success: function (resultado) {
+								if(resultado){
+									$("#resultado").html("Tarjeta Modificada!");
+									$("#resultado").show();
+								}else{
+									console.log("hola");
+									var error = resultado.error;
+								 $("#resultado_error").append(error);
+								 $("#resultado_error").show();
+							 }
+						}
+				});
+	}
+</script>
+
+
 <title></title>
 
 </head>
 <body>
-
+<?php echo form_open('form_validation/check_validation');?>
 <div class="content well">
 	<table class="table table-striped table-hover">
 	<thead>
@@ -35,8 +68,7 @@
 			</tr>
 	</tbody>
 	</table>
-    <form method="post" action="/tarjeta/actualizar_tarjeta">
-
+    <!-- <form method="post" action="/tarjeta/actualizar_tarjeta"> -->
     	<?php
     	foreach ($tarjeta_seleccionada as $r):?>
     		<input type="hidden" name="id_tarjeta" id="id_tarjeta" class="form-control" value="<?php echo $r->id_tarjeta;?>">
@@ -50,11 +82,17 @@
     			<option value="Master Card">Master Card</option>
     		</select><br>
     		<label>Estado:</label>
+				<select name="id_estado" id="id_estado" class="form-control">
+    			<option value="1">Activo</option>
+    			<option value="2">Inactivo</option>
+    		</select><br>
 
-    		<br><input type="submit" class="btn btn-primary" value="Modificar">
+    		<br><input type="button" class="btn btn-primary" href="javascript:;" onclick="modificar_tarjeta($('#id_tarjeta').val(),$('#numero_tarjeta').val(),$('#codigo_seguridad').val(),$('#tipo_tarjeta').val(),$('#id_estado').val());return false;" value="Modificar Tarjeta"/>
     	<?php endforeach?>
 
 	</form>
+	<div id="resultado"class="alert alert-success"  hidden="true"></div>
+	<div id="resultado_error" class="alert alert-danger" hidden="true"></div>
 </div>
 
 </body>

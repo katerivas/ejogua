@@ -24,12 +24,13 @@
         url:   '/usuario/modificar_usuario',
         type:  'post',
 				success: function (resultado) {
-						var respuesta = JSON.parse(resultado);
-						if(respuesta.success){
-							$("#resultado").html("Saldo Cargado");
+						//var respuesta = JSON.parse(resultado);
+						if(resultado){
+							$("#resultado").html("Usuario Modificado");
+							$("#resultado").show();
 					}else{
-						 $("#resultado").html(respuesta.error);
-						 $("#resultado").show();
+						 $("#resultado_error").html(resultado.error);
+						 $("#resultado_error").show();
 				}
         }
     });
@@ -64,7 +65,8 @@ foreach ($resultado as $r){?>
 <input type="button" class="btn btn-primary" value="Modificar" href="javascript:;" onclick="modificar_usuario($('#nombre').val(),$('#apellido').val(),$('#nro_ci').val(),$('#direccion').val(),$('#email').val(),$('#telefono').val());return false;" >
 </div>
 
-<div id="resultado" class="alert alert-danger" hidden="true"></div>
+<div id="resultado" class="alert alert-success" hidden="true"></div>
+<div id="resultado_error" class="alert alert-danger" hidden="true"></div>
 </form>
 </div>
 

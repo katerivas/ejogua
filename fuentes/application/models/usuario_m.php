@@ -5,7 +5,7 @@ Class Usuario_m extends CI_Model{
 		$this-> db -> select('id_usuario, usuario');
 		$this-> db -> from('usuarios');
 		$this-> db -> where('usuario', $usuario);
-		$this-> db -> where('password', $password);
+		$this-> db -> where('password', md5($password));
 		$this-> db -> limit(1);
 		$query = $this -> db -> get();
 		return $query;
