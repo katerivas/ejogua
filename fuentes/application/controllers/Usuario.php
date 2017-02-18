@@ -10,7 +10,11 @@ class Usuario extends CI_Controller {
 	public function index(){
 		$this->load->view('paginas/login');
 	}
-
+	function logout()
+	{
+			$this->session->sess_destroy();
+			$this->load->view('paginas/login');
+	}
 
 	public function login(){
 		$usuario = $this->input->post('usuario', true);
@@ -67,11 +71,10 @@ class Usuario extends CI_Controller {
 						'telefono' => $this->input->post('telefono'),
 				);
 				$this->load->model('usuario_m');
-				$this->usuario_m->actualizar($id_usuario,$data);
+				$id_usuario = $this->input->post('id_usuario', true);
+				$data['resultado']= $this->usuario_m->actualizar($id_usuario,$data);
 				$data['success'] = true;
 				echo json_encode($data);
-			} else {
-			header("location: login");
 			}
 		}else{
 			 $data['error'] = validation_errors();
@@ -83,12 +86,19 @@ class Usuario extends CI_Controller {
 	public function vista_usuario(){
 		$this->load->view('paginas/registro_usuario');
 	}
-
+//Menu vista del usuario
 	public function ver_usuarios(){
-		$this->mostrar_id_usuario();
+		$this->mostrar_usuarios();
 	}
 
 	public function agregar_usuario(){
+		$this->form_validation->set_rules('nombre','nombre', 'required');
+		$this->form_validation->set_rules('apellido','apellido', 'required');
+		$this->form_validation->set_rules('nro_ci','nro_ci', 'required|numeric');
+		$this->form_validation->set_rules('direccion','direccion', 'required');
+		$this->form_validation->set_rules('email','email', 'required');
+		$this->form_validation->set_rules('telefono','telefono', 'required');
+		if($this->form_validation->run()==true){
 		 $data = array(
 			 'usuario' => $this->input->post('usuario',true),
 			 'password' => md5($this->input->post('password',true)),
@@ -102,44 +112,68 @@ class Usuario extends CI_Controller {
 			 'tipo_usuario' => 1,
 			 'id_rol'=> 1,
 			 'id_grupo'=> 1,
-			 'id_descuento'=> 1
+			 'id_descuento'=> 1,
+			 'id_estado' => 1
 		 );
 
-		$this->load->model('usuario_m', 'usuario');
-		$resultado = $this->usuario->agregar_usuario($data);
-
+		 $this->load->model('usuario_m');
+		 $usuario = $this->input->post('usuario', true);
+		 $existe = $this->usuario_m->existe($usuario);
+		 if($existe == false){
+				$this->load->model('usuario_m', 'usuario');
+				$resultado = $this->usuario->agregar_usuario($data);
+				$data['success'] = true;
+				echo json_encode($data);
+			}else{
+				$data['success'] = false;
+				$data['error'] = "Error al agregar nuevo usuario. El usuario ya existe.";
+				echo json_encode($data);
+			}
+	}else{
+		$data['success'] = false;
+		$data['error'] = validation_errors();
+		echo json_encode($data);
+	}
 	}
 
 
-	// public function select_roles(){
-	// 	$this->load->model('usuario_m');
-	// 	$data['roles'] = $this->usuario_m->select_roles()->result();
-	// 	$this->load->view('paginas/administrar_usuarios',$data);
-	// }
-
-
-	public function mostrar_id_usuario(){
+	public function mostrar_usuarios(){
 			$id_usuario = $this->uri->segment(3);
 			$this->load->model('usuario_m');
 			$data['usuarios'] = $this->usuario_m->ver_usuarios();
 			$data['usuario_seleccionado'] = $this->usuario_m->mostrar_id_usuario_seleccionado($id_usuario);
 			$data['roles'] = $this->usuario_m->select_roles();
 			$this->load->view('paginas/administrar_usuarios',$data);
-
 	}
-	public function actualizar_usuario(){
-		$id_usuario = $this->input->post('id_usuario',true);
-		echo $id_usuario;
-		$data = array(
-			'usuario' =>$this->input->post('usuario', true),
-			'id_rol' =>$this->input->post('id_rol', true),
-			'id_estado' => $this->input->post('id_estado',true)
 
-		);
-		$this->load->model('usuario_m');
-		$this->usuario_m->actualizar_usuario($id_usuario,$data);
+	public function actualizar_usuario(){
+		$this->form_validation->set_rules('usuario','usuario', 'required|alpha');
+		if($this->form_validation->run()==true){
+				$data = array(
+					'usuario' =>$this->input->post('usuario', true),
+					'id_rol' =>$this->input->post('id_rol', true),
+					'id_estado' => $this->input->post('id_estado',true)
+				);
+				$this->load->model('usuario_m');
+
+				$usuario = $this->input->post('usuario', true);
+				$existe = $this->usuario_m->existe($usuario);
+				if($existe == false){
+					$this->load->model('usuario_m');
+					$id_usuario = $this->input->post('id_usuario', true);
+					$this->usuario_m->actualizar_usuario($id_usuario,$data);
+					$data['success'] = true;
+					echo json_encode($data);
+			}else{
+				$data['success'] = false;
+				$data['error'] = "Usuario no modificado. El nombre de usuario que intenta  modificar ya existe.";
+				echo json_encode($data);
+			}
+	}else{
+		$data['success'] = false;
+		$data['error'] = validation_errors();
+		echo json_encode($data);
 	}
 
 }
-
-?>
+}

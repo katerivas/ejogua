@@ -15,7 +15,7 @@
        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Itinerarios<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/itinerarios/index">Reporte de Itinerarios</a></li>
-            <li><a href="#">Consulta de Itinerarios</a></li>
+            <li><a href="/buscador_itinerarios/buscar_itinerarios">Consulta de Itinerarios</a></li>
           </ul>
        </li>
 
@@ -37,7 +37,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuraci&oacuten <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/usuario/ver_datos_usuario">Modificar mi usuario</a></li>
-            <li><a href="#">Cerrar Sesion</a></li>
+            <li><a href="/usuario/logout">Cerrar Sesion</a></li>
             <li><a href="/usuario/ver_usuarios">Control de Usuarios</a></li>
 
           </ul>

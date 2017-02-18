@@ -6,32 +6,24 @@ class Billetera extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->helper('form');
 		$this->load->library('session');
+		$this->load->helper('url');
 		//Autenticación
-		if ( $this->session->userdata('logged_in'))
+		if (! $this->session->userdata('logged_in'))
     {
         // Allow some methods?
         $allowed = array(
-            'index'
-
+						'index'
         );
         if ( in_array($this->router->fetch_method(), $allowed))
         {
-						// $this->load->helper('url');
-            // redirect('/paginas/error');
-						// $this->load->view('/paginas/error');
-						// $this->load->view('/paginas/error');
-						$this->load->helper('url');
-						redirect('/billetera/error', 'location');
-
-
+					$this->load->helper('url');
+					redirect('/billetera/error', 'location');
         }
     }
-
-
-	}
+}
 
 	public function error(){
-		$this->load->view('paginas/error');
+		$this->load->view('/paginas/error');
 	}
 
 	public function index(){

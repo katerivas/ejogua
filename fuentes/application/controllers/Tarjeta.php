@@ -78,7 +78,6 @@ class tarjeta extends CI_Controller {
 		$this->form_validation->set_rules('numero_tarjeta','numero_tarjeta', 'required|numeric');
 		$this->form_validation->set_rules('codigo_seguridad','codigo_seguridad', 'required|numeric');
 		if($this->form_validation->run()==true){
-
 			$id_tarjeta = $this->input->post('id_tarjeta',true);
 			$data = array(
 				'numero_tarjeta' =>$this->input->post('numero_tarjeta', true),
@@ -86,18 +85,26 @@ class tarjeta extends CI_Controller {
 				'codigo_seguridad' =>$this->input->post('codigo_seguridad', true),
 				'id_estado' =>$this->input->post('id_estado',true)
 			);
-			$this->load->model('tarjeta_m');
-			if($this->tarjeta_m->actualizar_tarjeta($id_tarjeta,$data))
-			{
-					$resultado = $this->tarjeta_m->actualizar_tarjeta($id_tarjeta,$data);
-					$data['datos'] = $resultado;
-					$data['success'] = true;
-					echo 'Ok Actualizado';
-					echo json_encode($data);
-			}
 
+			$this->load->model('tarjeta_m');
+			$numero_tarjeta = $this->input->post('numero_tarjeta', true);
+			$existe = $this->tarjeta_m->validar_tarjeta($numero_tarjeta);
+			if($existe == false){
+				if($this->tarjeta_m->actualizar_tarjeta($id_tarjeta,$data))
+				{
+						$resultado = $this->tarjeta_m->actualizar_tarjeta($id_tarjeta,$data);
+						$data['datos'] = $resultado;
+						$data['success'] = true;
+						echo 'Ok Actualizado';
+						echo json_encode($data);
+				}
+			}else{
+				$data['success'] = false;
+				$data['error'] = "Error al modificar. El n&uacutemero de tarjeta ya existe.";
+				echo json_encode($data);
+			}
 		}else{
-					echo "holaaa";
+
 					$data['error'] = validation_errors();
 					$data['success'] = false;
 					echo json_encode($data);
@@ -127,7 +134,6 @@ class tarjeta extends CI_Controller {
 						'saldo' => 0
 					 );
 					//$this->load->model('tarjeta_m', 'tarjeta');
-
 					$this->load->model('tarjeta_m');
 					$numero_tarjeta = $this->input->post('numero_tarjeta', true);
 					$existe = $this->tarjeta_m->validar_tarjeta($numero_tarjeta);
@@ -137,9 +143,13 @@ class tarjeta extends CI_Controller {
 						$data['datos'] = $resultado;
 						$data['success'] = true;
 						echo json_encode($data);
+					}else{
+							$data['error'] = "No se pudo agregar. La tarjeta ya existe";
+							$data['success'] = false;
+							echo json_encode($data);
 					}
 				}else{
-						// $data['error'] = "La tarjeta ya existe";
+						//$data['error'] = "La tarjeta ya existe";
 						$data['error'] = validation_errors();
 						$data['success'] = false;
 						echo json_encode($data);

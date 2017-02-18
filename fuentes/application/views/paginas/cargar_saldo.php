@@ -63,7 +63,8 @@
 		 			<br>
 					<div id="resultado" class="alert alert-success" hidden="true"></div>
 					<div id="resultado_error" class="alert alert-danger" hidden="true"></div>
-			</div><br>
+			</div>
+			<br>
 
 			</div>
 	</form>

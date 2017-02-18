@@ -50,8 +50,8 @@ Class Usuario_m extends CI_Model{
 
 	public function ver_usuarios()
 	{
-		$this->db->select('u.id_usuario,
-											u.usuario,
+		$this->db->select('u.id_usuario as id_usuario,
+											u.usuario as usuario,
 											r.detalle as detalle_rol,
 											g.detalle as detalle_grupo,
 											e.detalle as detalle_estado');
@@ -89,8 +89,19 @@ Class Usuario_m extends CI_Model{
 		$this->db->select('*');
 		$resultado = $this->db->get('roles');
 		return $resultado->result();
-
 	}
+
+	function existe($usuario)
+		{
+			$this->db->where('usuario', $usuario);
+			$query = $this->db->get('usuarios');
+			if ($query->num_rows() > 0){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
 
 	// public function ver_datos_por_id($id_estado){
 	// 	$this->db->select('*');

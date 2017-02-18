@@ -18,7 +18,7 @@
 	              //  var resultado = JSON.parse(resultado);
 									//  console.log(resultado);
 	                if(resultado){
-	                	$("#resultado").html("Saldo: " + resultado.datos.saldo);
+	                	$("#resultado").html("Saldo: " + resultado.datos[0].saldo);
 										$("#resultado").show();
 		            }else{
 		            	 $("#resultado").html("Error");
@@ -33,8 +33,8 @@
     <div class="content well">
     <form method="post" action="billetera/obtener_datos">
 			<div class="form-group">
-    		<h2>Consulta de Saldo</h2>
-					Numero de Tarjeta: <br>
+    		<h2>Consultar saldo</h2>
+					N&uacutemero de tarjeta: <br>
 					<select class="form-control" name="numero_tarjeta"  id="numero_tarjeta">
 					<?php
 						foreach ($tarjetas as $t) {

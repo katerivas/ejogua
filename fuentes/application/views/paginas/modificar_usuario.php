@@ -1,35 +1,38 @@
-<!DOCTYPE unspecified PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <head>
+	<?php $this->load->view('comunes/cabecera')?>
+	<?php
+	if (isset($this->session->userdata['logged_in'])) {
+	$username = ($this->session->userdata['logged_in']['usuario']);
+	$id_usuario = ($this->session->userdata['logged_in']['id_usuario']);
 
-<?php $this->load->view('comunes/cabecera')?></head></head>
-<title></title>
+	} else {
+	header("location: login");
+	}?>
 
-
+</head>
+<title>Modificar mi usuario</title>
 <script>
 	function modificar_usuario(nombre, apellido, nro_ci, direccion, email, telefono){
-
 	var parametros = {
-
 				"nombre" : nombre,
         "apellido" : apellido,
         "nro_ci" : nro_ci,
         "direccion" : direccion,
         "email" : email,
         "telefono" : telefono
-
     };
-		console.log(parametros);
     $.ajax({
         data: parametros,
         url:   '/usuario/modificar_usuario',
         type:  'post',
 				success: function (resultado) {
-						//var respuesta = JSON.parse(resultado);
-						if(resultado){
+						var respuesta = JSON.parse(resultado);
+						if(respuesta.success){
 							$("#resultado").html("Usuario Modificado");
 							$("#resultado").show();
 					}else{
-						 $("#resultado_error").html(resultado.error);
+						 $("#resultado_error").html(respuesta.error);
 						 $("#resultado_error").show();
 				}
         }
@@ -44,11 +47,11 @@
 <div class="content well">
 <?php echo form_open('form_validation/check_validation');?>
 <div><?php echo validation_errors(); ?></div>
-<form method="post" action="usuario/modificar_usuario">
 <div class="form-group">
 <?php
 foreach ($resultado as $r){?>
  	<label>Nombre</label>
+		<input type="hidden" class="form-control" id="id_usuario" value="<?php echo $id_usuario?>">
     <input type="text" class="form-control" id="nombre"value="<?php echo $r->nombre;?>" />
     <label>Apellido</label>
     <input type="text" class="form-control" id="apellido"value="<?php echo $r->apellido;?>" />
@@ -67,7 +70,7 @@ foreach ($resultado as $r){?>
 
 <div id="resultado" class="alert alert-success" hidden="true"></div>
 <div id="resultado_error" class="alert alert-danger" hidden="true"></div>
-</form>
+
 </div>
 
 </body>

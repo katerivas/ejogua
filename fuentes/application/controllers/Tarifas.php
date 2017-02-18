@@ -9,7 +9,7 @@ class tarifas extends CI_Controller {
 		{
 				// Allow some methods?
 				$allowed = array(
-						'index'
+
 				);
 				if ( in_array($this->router->fetch_method(), $allowed))
 				{

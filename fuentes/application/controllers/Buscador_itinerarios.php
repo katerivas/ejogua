@@ -27,6 +27,10 @@ class Buscador_itinerarios extends CI_Controller {
 
   }
 
+	public function buscar_itinerarios(){
+		$this->index();
+	}
+
 	public function error(){
 		$this->load->view('/paginas/error');
 	}

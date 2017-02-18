@@ -26,7 +26,7 @@
 			  }
 			?>
 			</p>
-	     <a href="usuario/vista_usuario">Registrarse</a><br>
+	     <a href="/usuario/vista_usuario">Registrarse</a><br>
 	     <input type="submit" class="btn btn-warning" value="Login"/>
 	   </form>
 	  </div>

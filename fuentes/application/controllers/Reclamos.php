@@ -7,11 +7,12 @@ class reclamos extends CI_Controller {
 		parent::__construct();
 		$this->load->model('reclamos_m', 'reclamos');
 
-		if ( $this->session->userdata('logged_in'))
+		if (! $this->session->userdata('logged_in'))
 		{
 				// Allow some methods?
 				$allowed = array(
-						'index'
+						'index',
+						'vista_usuario'
 				);
 				if ( in_array($this->router->fetch_method(), $allowed))
 				{

@@ -22,13 +22,13 @@
 						url:   '/tarjeta/actualizar_tarjeta',
 						type:  'post',
 						success: function (resultado) {
-								if(resultado){
+							var respuesta = JSON.parse(resultado);
+								if(respuesta.success){
 									$("#resultado").html("Tarjeta Modificada!");
 									$("#resultado").show();
 								}else{
 									console.log("hola");
-									var error = resultado.error;
-								 $("#resultado_error").append(error);
+								 $("#resultado_error").html(respuesta.error);
 								 $("#resultado_error").show();
 							 }
 						}
@@ -41,7 +41,8 @@
 
 </head>
 <body>
-<?php echo form_open('form_validation/check_validation');?>
+	<?php echo form_open('form_validation/check_validation');?>
+	<div><?php echo validation_errors(); ?></div>
 <div class="content well">
 	<table class="table table-striped table-hover">
 	<thead>

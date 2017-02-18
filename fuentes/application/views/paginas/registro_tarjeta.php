@@ -32,6 +32,8 @@
 									$("#resultado_success").show();
 		            }else{
 		            	 $("#resultado_danger").html(respuesta.error);
+									 $("#numero_tarjeta").val('');
+									 $("#codigo_seguridad").val('');
 									 $("#resultado_danger").show();
 			        }
 
@@ -44,16 +46,16 @@
 <?php $this->load->view('comunes/menu')?>
 <?php echo form_open('form_validation/check_validation');?>
 <div class="content well">
-		<h2>Registro de Tarjeta</h2>
+		<h2>Registro de tarjeta</h2>
 			<div class="form-group">
 
-			<label>Numero de Tarjeta:</label></td>
+			<label>N&uacutemero de tarjeta:</label></td>
 			<input type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta">
 			 <?php echo form_error('numero_tarjeta');  ?>
 		</div>
 
 		<div class="form-group">
-			<label>Seleccione tipo de Tarjeta</label>
+			<label>Seleccione tipo de tarjeta</label>
 			<select name="tipo_tarjeta" class="form-control" id="tipo_tarjeta">
 				<option id="Visa" value="Visa">Visa</option>
 				<option id="Master Card" value="Master Card">Master Card</option>
@@ -61,7 +63,7 @@
 		</div>
 
 		<div class="form-group">
-			<label>Codigo de Seguridad:</label>
+			<label>C&oacutedigo de seguridad:</label>
 			<input type="text" class="form-control" name="codigo_seguridad" id="codigo_seguridad"></input>
 			 <?php echo form_error('codigo_seguridad');  ?>
 		</div>

@@ -31,7 +31,6 @@ function existe($numero_tarjeta)
 			$this->db->where('t.id_usuario', $id_usuario);
 			$this->db->join('estados e', 'e.id_estado = t.id_estado');
 			$query = $this->db->get();
-
 			return $query->result();
 		}
 
