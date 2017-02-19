@@ -5,6 +5,36 @@ class Usuario extends CI_Controller {
 		$this->load->model('usuario_m', 'usuario');
 		$this->load->library('form_validation');
 		$this->load->library('session');
+		if (! $this->session->userdata('logged_in'))
+		{
+				// Allow some methods?
+				$allowed = array(
+
+						'logout',
+						'ver_datos_usuario',
+						'modificar_usuario',
+						'vista_usuario',
+						'ver_usuarios',
+						'agregar_usuario',
+						'mostrar_usuarios',
+						'actualizar_usuario'
+						);
+				if ( in_array($this->router->fetch_method(), $allowed))
+				{
+						// $this->load->helper('url');
+						// redirect('/paginas/error');
+						// $this->load->view('/paginas/error');
+						// $this->load->view('/paginas/error');
+						$this->load->helper('url');
+						redirect('/usuario/error', 'location');
+
+
+				}
+		}
+}
+
+public function error(){
+	$this->load->view('/paginas/error');
 }
 
 	public function index(){
@@ -87,7 +117,17 @@ class Usuario extends CI_Controller {
 
   //Menu vista del usuario
 	public function ver_usuarios(){
-		$this->mostrar_usuarios();
+		$id_usuario = ($this->session->userdata['logged_in']['id_usuario']);
+		//buscar id rol del usuario obtenido
+		$id_rol = $this->usuario->is_admin($id_usuario);
+
+
+		if($id_rol->num_rows()> 0){
+				$this->mostrar_usuarios();
+		}else{
+			$this->load->view('paginas/admin');
+		}
+
 	}
 
 	public function agregar_usuario(){
@@ -137,43 +177,65 @@ class Usuario extends CI_Controller {
 
 
 	public function mostrar_usuarios(){
+		$id_usuario = ($this->session->userdata['logged_in']['id_usuario']);
+		//buscar id rol del usuario obtenido
+		$id_rol = $this->usuario->is_admin($id_usuario);
+
+
+		if($id_rol->num_rows()> 0){
 			$id_usuario = $this->uri->segment(3);
 			$this->load->model('usuario_m');
 			$data['usuarios'] = $this->usuario_m->ver_usuarios();
 			$data['usuario_seleccionado'] = $this->usuario_m->mostrar_id_usuario_seleccionado($id_usuario);
 			$data['roles'] = $this->usuario_m->select_roles();
 			$this->load->view('paginas/administrar_usuarios',$data);
+
+		}else{
+			$this->load->view('paginas/admin');
+		}
+
+
+
 	}
 
 	public function actualizar_usuario(){
-		$this->form_validation->set_rules('usuario','usuario', 'required|alpha');
-		if($this->form_validation->run()==true){
-				$data = array(
-					'usuario' =>$this->input->post('usuario', true),
-					'id_rol' =>$this->input->post('id_rol', true),
-					'id_estado' => $this->input->post('id_estado',true),
-					'password' => $this->input->post(md5('password'),true)
-				);
-				$this->load->model('usuario_m');
-
-				$usuario = $this->input->post('usuario', true);
-				$existe = $this->usuario_m->existe($usuario);
-				if($existe == false){
+		$id_usuario = ($this->session->userdata['logged_in']['id_usuario']);
+		//buscar id rol del usuario obtenido
+		$id_rol = $this->usuario->is_admin($id_usuario);
+		//echo "last query: " . $this->db->last_query();
+		var_dump($id_rol->result());
+		die();
+		if($id_rol->num_rows()> 0){
+			//es admin
+			$this->form_validation->set_rules('usuario','usuario', 'required|alpha');
+			if($this->form_validation->run()==true){
+					$data = array(
+						'usuario' =>$this->input->post('usuario', true),
+						'id_rol' =>$this->input->post('id_rol', true),
+						'id_estado' => $this->input->post('id_estado',true),
+						'password' => $this->input->post(md5('password'),true)
+					);
 					$this->load->model('usuario_m');
-					$id_usuario = $this->input->post('id_usuario', true);
-					$this->usuario_m->actualizar_usuario($id_usuario,$data);
-					$data['success'] = true;
+					$usuario = $this->input->post('usuario', true);
+					$existe = $this->usuario_m->existe($usuario);
+					if($existe == false){
+						$this->load->model('usuario_m');
+						$id_usuario = $this->input->post('id_usuario', true);
+						$this->usuario_m->actualizar_usuario($id_usuario,$data);
+						$data['success'] = true;
+						echo json_encode($data);
+				}else{
+					$data['success'] = false;
+					$data['error'] = "Usuario no modificado. El nombre de usuario que intenta  modificar ya existe.";
 					echo json_encode($data);
-			}else{
-				$data['success'] = false;
-				$data['error'] = "Usuario no modificado. El nombre de usuario que intenta  modificar ya existe.";
-				echo json_encode($data);
-			}
+				}
+		}else{
+			$data['success'] = false;
+			$data['error'] = validation_errors();
+			echo json_encode($data);
+		}
 	}else{
-		$data['success'] = false;
-		$data['error'] = validation_errors();
-		echo json_encode($data);
+		$this->load->view('paginas/admin');
 	}
-
 }
 }

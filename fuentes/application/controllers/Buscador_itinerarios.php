@@ -8,7 +8,8 @@ class Buscador_itinerarios extends CI_Controller {
 			{
 					// Allow some methods?
 					$allowed = array(
-							'index'
+							'index',
+							'mostrar_itinerario_seleccionado'
 					);
 					if ( in_array($this->router->fetch_method(), $allowed))
 					{

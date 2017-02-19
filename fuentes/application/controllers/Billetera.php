@@ -12,7 +12,10 @@ class Billetera extends CI_Controller {
     {
         // Allow some methods?
         $allowed = array(
-						'index'
+						'index',
+						'obtener_datos',
+						'consultar_saldo',
+						'cargar_saldo'
         );
         if ( in_array($this->router->fetch_method(), $allowed))
         {

@@ -24,17 +24,19 @@
 	            },
 	            success: function (resultado) {
 	            	var respuesta = JSON.parse(resultado);
-								console.log(respuesta);
+								// console.log(respuesta);
 		            if(respuesta.success){
 		            	$("#resultado_success").html("Tarjeta Ingresada");
 									$("#numero_tarjeta").val('');
 									$("#codigo_seguridad").val('');
 									$("#resultado_success").show();
+									$("#resultado_danger").hide();
 		            }else{
 		            	 $("#resultado_danger").html(respuesta.error);
 									 $("#numero_tarjeta").val('');
 									 $("#codigo_seguridad").val('');
 									 $("#resultado_danger").show();
+									 $("#resultado_success").hide();
 			        }
 
 	            }
@@ -50,7 +52,7 @@
 			<div class="form-group">
 
 			<label>N&uacutemero de tarjeta:</label></td>
-			<input type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta">
+			<input type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta" >
 			 <?php echo form_error('numero_tarjeta');  ?>
 		</div>
 

@@ -27,6 +27,14 @@ Class Usuario_m extends CI_Model{
 		}
 	}
 
+	public function is_admin($id_usuario){
+		$this->db->select('r.id_rol as id_rol');
+		$this->db->where('u.id_usuario',$id_usuario);
+		$this->db->join('roles r', 'u.id_rol =  r.id_rol');
+		$this->db->where('r.detalle', 'administrador');
+		return $this->db->get('usuarios u');
+	}
+
 	public function agregar_usuario($data){
 		$resultado = $this->db->insert('usuarios', $data);
 		return $resultado;

@@ -5,11 +5,10 @@
 <?php $this->load->view('comunes/menu')?>
 
 <script>
-	function modificar_tarjeta(id_tarjeta,numero_tarjeta,codigo_seguridad,tipo_tarjeta,id_estado){
+	function modificar_tarjeta(id_tarjeta,codigo_seguridad,tipo_tarjeta,id_estado){
 
 		var parametros = {
 						"id_tarjeta" : id_tarjeta,
-						"numero_tarjeta" : numero_tarjeta,
 						"codigo_seguridad" : codigo_seguridad,
 						"tipo_tarjeta" : tipo_tarjeta,
 						"id_estado" : id_estado
@@ -71,9 +70,9 @@
     <!-- <form method="post" action="/tarjeta/actualizar_tarjeta"> -->
     	<?php
     	foreach ($tarjeta_seleccionada as $r):?>
-    		<input type="hidden" name="id_tarjeta" id="id_tarjeta" class="form-control" value="<?php echo $r->id_tarjeta;?>">
-    		<label>Numero de Tarjeta:</label>
-    		<input type="text" name="numero_tarjeta" id="numero_tarjeta" class="form-control" value="<?php echo $r->numero_tarjeta;?>"><br>
+    		<input type="hidden" name="id_tarjeta" id="id_tarjeta"  class="form-control" value="<?php echo $r->id_tarjeta;?>">
+    		<!-- <label>Numero de Tarjeta:</label>
+    		<input type="text" disabled  name="numero_tarjeta" id="numero_tarjeta" class="form-control" value="<?php echo $r->numero_tarjeta;?>"><br> -->
     		<label>Codigo de Seguridad: </label>
     		<input type="text" name="codigo_seguridad" id="codigo_seguridad"class="form-control"value="<?php echo $r->codigo_seguridad;?>">
     		<br><label>Tipo de Tarjeta:</label>
@@ -87,7 +86,7 @@
     			<option value="2">Inactivo</option>
     		</select><br>
     	<?php endforeach?>
-			<br><input type="button" class="btn btn-primary" href="javascript:;" onclick="modificar_tarjeta($('#id_tarjeta').val(),$('#numero_tarjeta').val(),$('#codigo_seguridad').val(),$('#tipo_tarjeta').val(),$('#id_estado').val());return false;" value="Modificar Tarjeta"/>
+			<br><input type="button" class="btn btn-primary" href="javascript:;" onclick="modificar_tarjeta($('#id_tarjeta').val(),$('#codigo_seguridad').val(),$('#tipo_tarjeta').val(),$('#id_estado').val());return false;" value="Modificar Tarjeta"/>
 	<!-- </form> -->
 	<div id="resultado"class="alert alert-success"  hidden="true"></div>
 	<div id="resultado_error" class="alert alert-danger" hidden="true"></div>

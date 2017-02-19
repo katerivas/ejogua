@@ -33,27 +33,7 @@
 	        }
 	    });
 	}
-	//
-	// function cambiar_clave(password){
-	// 	var parametros = (
-	// 		"password" : password
-	// 	);
-	// 	$.ajax({
-	// 			data: parametros,
-	// 			url:   '/usuario/cambiar_clave',
-	// 			type:  'post',
-	// 			success: function (resultado) {
-	// 					var respuesta = JSON.parse(resultado);
-	// 					if(respuesta.success){
-	// 						$("#resultado").html("Usuario Modificado");
-	// 						$("#resultado").show();
-	// 				}else{
-	// 					 $("#resultado_error").html(respuesta.error);
-	// 					 $("#resultado_error").show();
-	// 			}
-	// 			}
-	// 	});
-	// }
+
 	</script>
 
 <title>Administraci&oacuten de Usuarios</title>

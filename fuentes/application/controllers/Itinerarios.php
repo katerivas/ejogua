@@ -5,11 +5,11 @@ class Itinerarios extends CI_Controller {
 		parent::__construct();
 		$this->load->library('Mpdf/mpdf');
 		$this->load->model('itinerarios_m', 'itinerarios');
-		if ( $this->session->userdata('logged_in'))
+		if (! $this->session->userdata('logged_in'))
 		{
 				// Allow some methods?
 				$allowed = array(
-
+							'index'
 				);
 				if ( in_array($this->router->fetch_method(), $allowed))
 				{

@@ -9,9 +9,8 @@ class password_m extends CI_Model {
 
 	public function modificar_password($data){
     $id_usuario = $data['id_usuario'];
-
+		$data['password'] = md5($data['password']);
     $this->db->where('id_usuario', $id_usuario);
-		$this->db->update('usuarios', $data);
-		return true;
+		return $this->db->update('usuarios', $data);
 	}
 }

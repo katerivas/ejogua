@@ -8,11 +8,16 @@ class tarjeta extends CI_Controller {
 		$this->load->model('tarjeta_m', 'tarjeta');
 		$this->load->library('form_validation');
 		$this->load->helper('form');
-		if ( $this->session->userdata('logged_in'))
+		if (! $this->session->userdata('logged_in'))
 		{
 				// Allow some methods?
 				$allowed = array(
-						'index'
+						'index',
+						'obtener_datos_tarjeta',
+						'vista_usuario',
+						'mostrar_id_tarjeta',
+						'actualizar_tarjeta',
+						'registro_tarjeta'
 				);
 				if ( in_array($this->router->fetch_method(), $allowed))
 				{
@@ -67,21 +72,21 @@ class tarjeta extends CI_Controller {
 	}
 
 	public function actualizar_tarjeta(){
-		$this->form_validation->set_rules('numero_tarjeta','numero_tarjeta', 'required|numeric');
+		// $this->form_validation->set_rules('numero_tarjeta','numero_tarjeta', 'required|numeric');
 		$this->form_validation->set_rules('codigo_seguridad','codigo_seguridad', 'required|numeric');
 		if($this->form_validation->run()==true){
 			$id_tarjeta = $this->input->post('id_tarjeta',true);
 			$data = array(
-				'numero_tarjeta' =>$this->input->post('numero_tarjeta', true),
+				// 'numero_tarjeta' =>$this->input->post('numero_tarjeta', true),
 				'tipo_tarjeta' => $this->input->post('tipo_tarjeta', true),
 				'codigo_seguridad' =>$this->input->post('codigo_seguridad', true),
 				'id_estado' =>$this->input->post('id_estado',true)
 			);
 
 			$this->load->model('tarjeta_m');
-			$numero_tarjeta = $this->input->post('numero_tarjeta', true);
-			$existe = $this->tarjeta_m->validar_tarjeta($numero_tarjeta);
-			if($existe == false){
+			// $numero_tarjeta = $this->input->post('numero_tarjeta', true);
+			// $existe = $this->tarjeta_m->validar_tarjeta($numero_tarjeta);
+			// if($existe == false){
 				if($this->tarjeta_m->actualizar_tarjeta($id_tarjeta,$data))
 				{
 						$resultado = $this->tarjeta_m->actualizar_tarjeta($id_tarjeta,$data);
@@ -90,11 +95,11 @@ class tarjeta extends CI_Controller {
 						$data['success'] = true;
 						echo json_encode($data);
 				}
-			}else{
-				$data['success'] = false;
-				$data['error'] = "Error al modificar. El n&uacutemero de tarjeta ya existe.";
-				echo json_encode($data);
-			}
+			// }else{
+			// 	$data['success'] = false;
+			// 	$data['error'] = "Error al modificar. El n&uacutemero de tarjeta ya existe.";
+			// 	echo json_encode($data);
+			// }
 		}else{
 
 					$data['error'] = validation_errors();
