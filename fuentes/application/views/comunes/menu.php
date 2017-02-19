@@ -37,8 +37,8 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuraci&oacuten <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/usuario/ver_datos_usuario">Modificar mi usuario</a></li>
-            <li><a href="/usuario/logout">Cerrar Sesion</a></li>
             <li><a href="/usuario/ver_usuarios">Control de Usuarios</a></li>
+            <li><a href="/usuario/logout">Cerrar Sesion</a></li>
 
           </ul>
 	</li>

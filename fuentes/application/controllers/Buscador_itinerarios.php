@@ -4,27 +4,18 @@ class Buscador_itinerarios extends CI_Controller {
 		parent::__construct();
       $this->load->model('buscador_itinerarios_m');
 
-			// if ( $this->session->userdata('logged_in'))
-	    // {
-	    //     // Allow some methods?
-	    //     $allowed = array(
-	    //         'index',
-	    //         'mostrar_itinerario_seleccionado'
-			//
-	    //     );
-	    //     if ( in_array($this->router->fetch_method(), $allowed))
-	    //     {
-			// 				// $this->load->helper('url');
-	    //         // redirect('/paginas/error');
-			// 				// $this->load->view('/paginas/error');
-			// 				// $this->load->view('/paginas/error');
-			// 				$this->load->helper('url');
-			// 				redirect('/buscador_itinerarios/error', 'location');
-			//
-			//
-	    //     }
-	    // }
-
+			if (! $this->session->userdata('logged_in'))
+			{
+					// Allow some methods?
+					$allowed = array(
+							'index'
+					);
+					if ( in_array($this->router->fetch_method(), $allowed))
+					{
+						$this->load->helper('url');
+						redirect('/buscador_itinerarios/error', 'location');
+					}
+			}
   }
 
 	public function buscar_itinerarios(){

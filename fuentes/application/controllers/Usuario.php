@@ -5,7 +5,7 @@ class Usuario extends CI_Controller {
 		$this->load->model('usuario_m', 'usuario');
 		$this->load->library('form_validation');
 		$this->load->library('session');
-	}
+}
 
 	public function index(){
 		$this->load->view('paginas/login');
@@ -28,7 +28,7 @@ class Usuario extends CI_Controller {
 					'logged_in' => TRUE
 			);
 			$this->session->set_userdata('logged_in', $usuario_sesion);
-			$this->load->view('inicio/inicio');
+					$this->load->view('inicio/inicio');
 		}else{
 			 //redirect("/usuario","refresh");
 			 $data['mensaje'] = 'Usuario o password incorrecto';
@@ -60,7 +60,6 @@ class Usuario extends CI_Controller {
 			if (isset($this->session->userdata['logged_in'])) {
 				$username = ($this->session->userdata['logged_in']['usuario']);
 				$id_usuario = ($this->session->userdata['logged_in']['id_usuario']);
-				$this->ver_datos_usuario();
 				$data = array(
 						'nombre' => $this->input->post('nombre'),
 						'apellido' => $this->input->post('apellido'),
@@ -71,22 +70,22 @@ class Usuario extends CI_Controller {
 						'telefono' => $this->input->post('telefono'),
 				);
 				$this->load->model('usuario_m');
-				$id_usuario = $this->input->post('id_usuario', true);
-				$data['resultado']= $this->usuario_m->actualizar($id_usuario,$data);
-				$data['success'] = true;
-				echo json_encode($data);
+				$v_data['resultado'] = $this->usuario_m->actualizar($id_usuario, $data);
+				$v_data['success'] = true;
+				echo json_encode($v_data);
 			}
 		}else{
-			 $data['error'] = validation_errors();
-			 $data['success'] = false;
-			 echo json_encode($data);
+		     $v_data['error'] = validation_errors();
+			   $v_data['success'] = false;
+			   echo json_encode($v_data);
 		}
 	}
 
 	public function vista_usuario(){
 		$this->load->view('paginas/registro_usuario');
 	}
-//Menu vista del usuario
+
+  //Menu vista del usuario
 	public function ver_usuarios(){
 		$this->mostrar_usuarios();
 	}
@@ -152,7 +151,8 @@ class Usuario extends CI_Controller {
 				$data = array(
 					'usuario' =>$this->input->post('usuario', true),
 					'id_rol' =>$this->input->post('id_rol', true),
-					'id_estado' => $this->input->post('id_estado',true)
+					'id_estado' => $this->input->post('id_estado',true),
+					'password' => $this->input->post(md5('password'),true)
 				);
 				$this->load->model('usuario_m');
 

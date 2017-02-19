@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+<html>
 <head>
 	<?php $this->load->view('comunes/cabecera')?>
+	<?php $this->load->view('comunes/menu')?>
 	<?php
 	if (isset($this->session->userdata['logged_in'])) {
-	$username = ($this->session->userdata['logged_in']['usuario']);
-	$id_usuario = ($this->session->userdata['logged_in']['id_usuario']);
-
+	    $username = ($this->session->userdata['logged_in']['usuario']);
+	    $id_usuario = ($this->session->userdata['logged_in']['id_usuario']);
 	} else {
-	header("location: login");
+	//header("location: login");
 	}?>
 
-</head>
+
 <title>Modificar mi usuario</title>
 <script>
 	function modificar_usuario(nombre, apellido, nro_ci, direccion, email, telefono){
@@ -28,22 +29,21 @@
         type:  'post',
 				success: function (resultado) {
 						var respuesta = JSON.parse(resultado);
-						if(respuesta.success){
+						if(respuesta.resultado){
+							$("#resultado_error").hide();
 							$("#resultado").html("Usuario Modificado");
 							$("#resultado").show();
 					}else{
-						 $("#resultado_error").html(respuesta.error);
-						 $("#resultado_error").show();
-				}
+					     $("#resultado").hide();
+						   $("#resultado_error").html(respuesta.error);
+						   $("#resultado_error").show();
+				  }
         }
     });
 }
 </script>
-
-<html>
+</head>
 <body>
-<?php $this->load->view('comunes/menu')?>
-
 <div class="content well">
 <?php echo form_open('form_validation/check_validation');?>
 <div><?php echo validation_errors(); ?></div>
@@ -65,7 +65,7 @@ foreach ($resultado as $r){?>
     <input type="text" class="form-control" id="telefono"value="<?php echo $r->telefono;?>" />
 <?php } ?>
 <br>
-<input type="button" class="btn btn-primary" value="Modificar" href="javascript:;" onclick="modificar_usuario($('#nombre').val(),$('#apellido').val(),$('#nro_ci').val(),$('#direccion').val(),$('#email').val(),$('#telefono').val());return false;" >
+<input type="button" class="btn btn-primary" href="javascript:;" onclick="modificar_usuario($('#nombre').val(),$('#apellido').val(),$('#nro_ci').val(),$('#direccion').val(),$('#email').val(),$('#telefono').val());return false;" value="Modificar"/>
 </div>
 
 <div id="resultado" class="alert alert-success" hidden="true"></div>

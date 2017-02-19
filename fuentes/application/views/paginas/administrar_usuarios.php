@@ -5,7 +5,7 @@
 	<?php $this->load->view('comunes/cabecera')?>
 	<?php $this->load->view('comunes/menu')?>
 	<script>
-		function administrar_usuarios(id_usuario, usuario, id_rol, id_estado){
+		function administrar_usuarios(id_usuario, usuario, id_rol, id_estado,password){
 
 		var parametros = {
 
@@ -13,6 +13,7 @@
 	        "usuario" : usuario,
 	        "id_rol" : id_rol,
 	        "id_estado" : id_estado,
+					"password" : password,
 
 	    };
 			console.log(parametros);
@@ -32,6 +33,27 @@
 	        }
 	    });
 	}
+	//
+	// function cambiar_clave(password){
+	// 	var parametros = (
+	// 		"password" : password
+	// 	);
+	// 	$.ajax({
+	// 			data: parametros,
+	// 			url:   '/usuario/cambiar_clave',
+	// 			type:  'post',
+	// 			success: function (resultado) {
+	// 					var respuesta = JSON.parse(resultado);
+	// 					if(respuesta.success){
+	// 						$("#resultado").html("Usuario Modificado");
+	// 						$("#resultado").show();
+	// 				}else{
+	// 					 $("#resultado_error").html(respuesta.error);
+	// 					 $("#resultado_error").show();
+	// 			}
+	// 			}
+	// 	});
+	// }
 	</script>
 
 <title>Administraci&oacuten de Usuarios</title>
@@ -81,11 +103,13 @@
 					<option value="1"> Administrador </option>
 					<option value="2"> Clientes </option>
 			</select>
-			<input type="button" class="btn btn-primary" value="Modificar" href="javascript:;" onclick="administrar_usuarios($('#id_usuario').val(),$('#usuario').val(),$('#id_rol').val(),$('#id_estado').val());return false;" >
-			<div id="resultado" class="alert alert-success" hidden="true"></div>
-	<?php endforeach ?>
+			<br>
+			<input type="button" class="btn btn-primary" value="Modificar" href="javascript:;" onclick="administrar_usuarios($('#id_usuario').val(),$('#usuario').val(),$('#id_rol').val(),$('#id_estado').val(),$('#password').val());return false;" >
 
-	<div id="resultado" class="alert alert-danger" hidden="true"></div>
+
+<?php endforeach ?>
+
+	<div id="resultado" class="alert alert-success" hidden="true"></div>
 	<div id="resultado_error" class="alert alert-danger" hidden="true"></div>
 		<?php echo  form_close();?>
 </body>

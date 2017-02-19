@@ -1,6 +1,5 @@
-<!DOCTYPE unspecified PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
-
 <head>
 <?php $this->load->view('comunes/cabecera')?>
 <?php $this->load->view('comunes/menu')?>
@@ -16,20 +15,20 @@
 						"id_estado" : id_estado
 
 				};
-				console.log(parametros);
 				$.ajax({
 						data: parametros,
 						url:   '/tarjeta/actualizar_tarjeta',
 						type:  'post',
 						success: function (resultado) {
-							var respuesta = JSON.parse(resultado);
-								if(respuesta.success){
+							  var respuesta = JSON.parse(resultado);
+								if(respuesta.resultado){
+									$("#resultado_error").hide();
 									$("#resultado").html("Tarjeta Modificada!");
 									$("#resultado").show();
 								}else{
-									console.log("hola");
-								 $("#resultado_error").html(respuesta.error);
-								 $("#resultado_error").show();
+									   $("#resultado").hide();
+								     $("#resultado_error").html(respuesta.error);
+								     $("#resultado_error").show();
 							 }
 						}
 				});
@@ -87,11 +86,9 @@
     			<option value="1">Activo</option>
     			<option value="2">Inactivo</option>
     		</select><br>
-
-    		<br><input type="button" class="btn btn-primary" href="javascript:;" onclick="modificar_tarjeta($('#id_tarjeta').val(),$('#numero_tarjeta').val(),$('#codigo_seguridad').val(),$('#tipo_tarjeta').val(),$('#id_estado').val());return false;" value="Modificar Tarjeta"/>
     	<?php endforeach?>
-
-	</form>
+			<br><input type="button" class="btn btn-primary" href="javascript:;" onclick="modificar_tarjeta($('#id_tarjeta').val(),$('#numero_tarjeta').val(),$('#codigo_seguridad').val(),$('#tipo_tarjeta').val(),$('#id_estado').val());return false;" value="Modificar Tarjeta"/>
+	<!-- </form> -->
 	<div id="resultado"class="alert alert-success"  hidden="true"></div>
 	<div id="resultado_error" class="alert alert-danger" hidden="true"></div>
 </div>

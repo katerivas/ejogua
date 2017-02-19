@@ -49,14 +49,6 @@ class tarjeta extends CI_Controller {
 		$this->load->view('paginas/registro_tarjeta');
 	}
 
-	/* public function ver_tarjetas_usuario(){
-			$id_usuario = 53;
-			$this->load->model('tarjeta_m');
-			$data['resultado'] = $this->tarjeta_m->ver_tarjeta_usuario($id_usuario);
-			$this->load->view('paginas/ver_tarjetas',$data);
-
-	} */
-
 
 	public function mostrar_id_tarjeta(){
 
@@ -93,9 +85,9 @@ class tarjeta extends CI_Controller {
 				if($this->tarjeta_m->actualizar_tarjeta($id_tarjeta,$data))
 				{
 						$resultado = $this->tarjeta_m->actualizar_tarjeta($id_tarjeta,$data);
-						$data['datos'] = $resultado;
+						//$data['datos'] = $resultado;
+						$data['resultado'] = $resultado;
 						$data['success'] = true;
-						echo 'Ok Actualizado';
 						echo json_encode($data);
 				}
 			}else{

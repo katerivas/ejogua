@@ -65,8 +65,7 @@ Class Usuario_m extends CI_Model{
 
 	public function actualizar($id_usuario,$data){
 		$this->db->where('id_usuario', $id_usuario);
-		$this->db->update('usuarios', $data);
-		return true;
+		return $this->db->update('usuarios', $data);
 	}
 
 	public function mostrar_id_usuario_seleccionado($id_usuario){

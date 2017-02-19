@@ -28,17 +28,17 @@ $html = "	<style>
 	    color: white;
 	}
 	</style>
-		<h2>Reporte de Itinerarios </h2>
+		<h2>Logs </h2>
 
 		<table>
 			<tr>
-			<th>Numero de Itinerario </th>
-			<th>Hora de Salida </th>
-			<th>Hora de Llegada </th>
-			<th>Ciudad</th>
-			<th>Linea</th>
-			<th>Estacion Inicio</th>
-			<th>Estacion Final </th>
+			<th>ID</th>
+			<th>Query </th>
+			<th>Fecha / Hora </th>
+			<th>ID Usuario</th>
+			<th>Uri_String</th>
+			<th>Params</th>
+
 			</tr>
 		";
 foreach ($datos as $row) {
@@ -47,13 +47,13 @@ foreach ($datos as $row) {
 	$html = $html . '
 
 			<tr>
-			<td>'. $row->id_itinerario .' </td>' .
-			'<td>'. $row->hora_salida . '</td>' .
-			'<td>'. $row->hora_llegada .'</td>' .
-			'<td>' . $row->nombre_ciudad . '</td>'.
-			'<td>'. $row->detalle_linea .'</td>' .
-			'<td>'. $row->detalle_estacion_inicio .'</td>' .
-			'<td>'. $row->detalle_estacion_final .'</td>' .
+			<td>'. $row->id .' </td>' .
+			'<td>'. $row->query . '</td>' .
+			'<td>'. $row->fecha_hora .'</td>' .
+			'<td>' . $row->id_usuario . '</td>'.
+			'<td>'. $row->uri_string .'</td>' .
+			'<td>'. $row->params .'</td>' .
+
 			'</tr>';
 
 }
