@@ -203,35 +203,36 @@ public function error(){
 		//buscar id rol del usuario obtenido
 		$id_rol = $this->usuario->is_admin($id_usuario);
 		//echo "last query: " . $this->db->last_query();
-		var_dump($id_rol->result());
-		die();
+		// var_dump($id_rol->result());
+		// die();
 		if($id_rol->num_rows()> 0){
 			//es admin
-			$this->form_validation->set_rules('usuario','usuario', 'required|alpha');
-			if($this->form_validation->run()==true){
+			//$this->form_validation->set_rules('usuario','usuario', 'required|alpha');
+			if($this->form_validation->run()==false){
 					$data = array(
-						'usuario' =>$this->input->post('usuario', true),
+						// 'usuario' =>$this->input->post('usuario', true),
 						'id_rol' =>$this->input->post('id_rol', true),
-						'id_estado' => $this->input->post('id_estado',true),
-						'password' => $this->input->post(md5('password'),true)
+						'id_estado' => $this->input->post('id_estado',true)
+						// 'password' => $this->input->post(md5('password'),true)
 					);
-					$this->load->model('usuario_m');
-					$usuario = $this->input->post('usuario', true);
-					$existe = $this->usuario_m->existe($usuario);
-					if($existe == false){
+					// $this->load->model('usuario_m');
+					// $usuario = $this->input->post('usuario', true);
+					// $existe = $this->usuario_m->existe($usuario);
+					// if($existe == false){
 						$this->load->model('usuario_m');
 						$id_usuario = $this->input->post('id_usuario', true);
-						$this->usuario_m->actualizar_usuario($id_usuario,$data);
+						$resultado = $this->usuario_m->actualizar_usuario($id_usuario,$data);
+						$data['resultado'] = $resultado;
 						$data['success'] = true;
 						echo json_encode($data);
-				}else{
-					$data['success'] = false;
-					$data['error'] = "Usuario no modificado. El nombre de usuario que intenta  modificar ya existe.";
-					echo json_encode($data);
-				}
+				// }else{
+				// 	$data['success'] = false;
+				// 	$data['error'] = "Usuario no modificado. El nombre de usuario que intenta  modificar ya existe.";
+				// 	echo json_encode($data);
+				// }
 		}else{
 			$data['success'] = false;
-			$data['error'] = validation_errors();
+			$data['error'] = "Hubo un error";
 			echo json_encode($data);
 		}
 	}else{
