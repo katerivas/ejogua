@@ -14,15 +14,14 @@
 
        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Itinerarios<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/itinerarios/index">Reporte de Itinerarios</a></li>
+            <li><a href="/itinerarios/index" target="_blank">Reporte de Itinerarios</a></li>
             <li><a href="/buscador_itinerarios/buscar_itinerarios">Consulta de Itinerarios</a></li>
           </ul>
        </li>
 
        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Tarifas<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/tarifas/index">Reporte de Tarifas</a></li>
-            <li><a href="#">Consulta de Tarifas</a></li>
+            <li><a href="/tarifas/index" target="_blank">Reporte de Tarifas</a></li>
           </ul>
        </li>
 
